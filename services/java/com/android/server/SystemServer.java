@@ -1,6 +1,8 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
- *
+ * Copyright (C) 2016-2017 halogenOS
+ * Copyright (C) 2025-2025 halogenOS
+ 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -830,6 +832,10 @@ public final class SystemServer implements Dumpable {
                                 .BOOT_TIME_EVENT_ELAPSED_TIME__EVENT__SYSTEM_SERVER_INIT_START,
                         uptimeMillis);
             }
+
+            Slog.i("The-Pixel-Project",
+                "Welcome to The Pixel Project! A Pixel Experience Alternative. " +
+                "Ready to work with us?");
 
             // In case the runtime switched since last boot (such as when
             // the old runtime was removed in an OTA), set the system
