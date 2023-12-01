@@ -41,4 +41,7 @@
     <string name="config_avatar_picker_class" translatable="false">
         com.android.avatarpicker.ui.AvatarPickerActivity
     </string>
+
+    <!-- Control whether to show Wifi standard in Wifi icon -->
+    <bool name="config_show_wifi_standard">false</bool>
 </resources>
