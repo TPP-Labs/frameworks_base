@@ -46,7 +46,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_AIWALLPAPERS = "com.google.android.apps.aiwallpapers";
     private static final String PACKAGE_ARCORE = "com.google.ar.core";
     private static final String PACKAGE_ASI = "com.google.android.as";
-    private static final String PACKAGE_ASSISTANT = "com.google.android.apps.googleassistant";
+    private static final String PACKAGE_BARD = "com.google.android.apps.bard";
     private static final String PACKAGE_EMOJIWALLPAPER = "com.google.android.apps.emojiwallpaper";
 
     private static final String PACKAGE_FINSKY = "com.android.vending";
@@ -55,6 +55,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_NETFLIX = "com.netflix.mediaclient";
 
     private static final String PACKAGE_NEXUSLAUNCHER = "com.google.android.apps.nexuslauncher";
+    private static final String PACKAGE_PIXELCREATIVE = "com.google.android.apps.pixel.creativeassistant";
     private static final String PACKAGE_PIXELTHEMES = "com.google.android.apps.customization.pixel";
     private static final String PACKAGE_PIXELWALLPAPER = "com.google.android.apps.wallpaper.pixel";
     private static final String PACKAGE_LIVEWALLPAPER = "com.google.pixel.livewallpaper";
@@ -63,6 +64,7 @@ public class PropImitationHooks {
     private static final String PACKAGE_WALLPAPER = "com.google.android.apps.wallpaper";
     private static final String PACKAGE_WALLPAPEREFFECTS = "com.google.android.wallpaper.effects";
 
+    private static final String PACKAGE_WEATHER = "com.google.android.apps.weather";
     private static final String PROCESS_GMS_GAPPS = PACKAGE_GMS + ".gapps";
     private static final String PROCESS_GMS_GSERVICE = PACKAGE_GMS + ".gservice";
     private static final String PROCESS_GMS_LEARNING = PACKAGE_GMS + ".learning";
@@ -86,6 +88,17 @@ public class PropImitationHooks {
             "MODEL", "Pixel 9 Pro XL",
             "ID", "AP4A.241205.013",
             "FINGERPRINT", "google/komodo/komodo:15/AP4A.241205.013/12621605:user/release-keys"
+    );
+
+    private static final Map<String, String> sPixelNineXLProps = Map.of(
+            "PRODUCT", "komodo",
+            "DEVICE", "komodo",
+            "HARDWARE", "komodo",
+            "MANUFACTURER", "Google",
+            "BRAND", "google",
+            "MODEL", "Pixel 9 Pro XL",
+            "ID", "AD1A.240905.004",
+            "FINGERPRINT", "google/komodo/komodo:14/AD1A.240905.004/12196292:user/release-keys"
     );
 
     private static final Map<String, String> sPixelFiveProps = Map.of(
@@ -186,7 +199,7 @@ public class PropImitationHooks {
 
         /* Set certified properties for GMSCore
          * Set stock fingerprint for ARCore
-         * Set Pixel 8 Pro for Google, ASI and GMS device configurator
+         * Set Pixel 9 Pro XL for Google, ASI and GMS device configurator
          * Set Pixel XL for Google Photos
          * Set custom model for Netflix
          */
@@ -207,20 +220,15 @@ public class PropImitationHooks {
                 return;
         }
 
-        if (!sStockFp.isEmpty() && packageName.equals(PACKAGE_ARCORE)) {
-            dlog("Setting stock fingerprint for: " + packageName);
-            setPropValue("FINGERPRINT", sStockFp);
-            return;
-        }
-
         switch (packageName) {
             case PACKAGE_AIWALLPAPERS:
-            case PACKAGE_ASSISTANT:
             case PACKAGE_ASI:
+            case PACKAGE_BARD:
             case PACKAGE_EMOJIWALLPAPER:
             case PACKAGE_GMS:
             case PACKAGE_LIVEWALLPAPER:
             case PACKAGE_NEXUSLAUNCHER:
+            case PACKAGE_PIXELCREATIVE:
             case PACKAGE_PIXELTHEMES:
             case PACKAGE_PIXELWALLPAPER:
             case PACKAGE_SUBSCRIPTION_RED:
@@ -234,6 +242,9 @@ public class PropImitationHooks {
                     dlog("Spoofing Pixel 9 Pro XL for: " + packageName + " process: " + processName);
                     setProps(sPixelNineProps);
                 }
+            case PACKAGE_WEATHER:
+                dlog("Spoofing Pixel 9 Pro XL for: " + packageName + " process: " + processName);
+                setProps(sPixelNineXLProps);
                 return;
             case PACKAGE_GPHOTOS:
                 dlog("Spoofing Pixel XL for Google Photos");
@@ -243,6 +254,12 @@ public class PropImitationHooks {
                 if (!sNetflixModel.isEmpty()) {
                     dlog("Setting model to " + sNetflixModel + " for Netflix");
                     setPropValue("MODEL", sNetflixModel);
+                }
+                return;
+            case PACKAGE_ARCORE:
+                if (!sStockFp.isEmpty()) {
+                    dlog("Setting stock fingerprint for: " + packageName);
+                    setPropValue("FINGERPRINT", sStockFp);;
                 }
                 return;
         }
