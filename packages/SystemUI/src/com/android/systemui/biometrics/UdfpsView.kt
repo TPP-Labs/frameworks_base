@@ -48,14 +48,6 @@ class UdfpsView(
         textSize = 32f
     }
 
-    private val sensorTouchAreaCoefficient: Float =
-        context.theme.obtainStyledAttributes(attrs, R.styleable.UdfpsView, 0, 0).use { a ->
-            require(a.hasValue(R.styleable.UdfpsView_sensorTouchAreaCoefficient)) {
-                "UdfpsView must contain sensorTouchAreaCoefficient"
-            }
-            a.getFloat(R.styleable.UdfpsView_sensorTouchAreaCoefficient, 0f)
-        }
-
     private val onIlluminatedDelayMs = context.resources.getInteger(
         com.android.internal.R.integer.config_udfps_illumination_transition_ms
     ).toLong()
